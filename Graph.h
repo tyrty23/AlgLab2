@@ -15,7 +15,7 @@ public:
 	int CountV;
 	vector<Edge> Edges;
 
-	//int** AdjMatrix;
+	//vector<vector<int>> AdjMatrix;
 
 	Graph(vector<Edge>,int);
 

@@ -1,7 +1,31 @@
 #include"Graph.h"
+#include <string>
+#include <stack>
 
 
+//float recur(float a) {
+//	return recur(a)
+//}
 
+bool POP(stack<char> &a) {
+	try {
+		//char b = a.top();
+		a.pop();
+	}
+	catch (...) {
+		cout << "\nDelete error\n";
+	}
+	return true;
+}
+bool PUSH(stack<char> &a, char c) {
+	try {
+		a.push(c);
+	}
+	catch (...) {
+		cout << "\Add error\n";
+	}
+	return 1;
+}
 
 
 void main()
@@ -26,9 +50,7 @@ void main()
 	Edges.push_back(Edge::Edge(6, 7, 5));
 	Edges.push_back(Edge::Edge(7, 8, 7));
 	Graph g(Edges,8);
-	kraskal = g.Kraskal();
-
-
+	
 
 	auto begin = chrono::steady_clock::now();
 	prima = g.Prima();
@@ -48,8 +70,31 @@ void main()
 	}
 
 	cout << "\nKraskal: " << endl;
-	for (int i = 0; i < kraskal.size(); i++) {
+	for (int i = 0; i < kraskal.size(); i++) 
 		cout << kraskal[i].V1 << '-' << kraskal[i].V2 << endl;
+	
+
+
+
+
+
+	string c;
+	stack<char> stack;
+	cout << "\nEnter the string: \n";
+	while(1) {
+		cin >> c;	
+		for (int i = 0; i < c.size(); i++) {
+			if (c[i] == '(') {
+				PUSH(stack, '(');	
+			}	
+			if (c[i] == ')')
+				POP(stack);
+		}
+
+		if (c == "0")
+			break;
 	}
 
 }
+
+

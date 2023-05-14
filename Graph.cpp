@@ -1,20 +1,19 @@
 #include "Graph.h"
 
-Graph::Graph(vector<Edge> e,int n)
+Graph::Graph(vector<Edge> e, int n)
 {
 	this->Edges = e;
 	this->CountV = n;
-	
-	//AdjMatrix = new int* [n];
-	//for (int i = 0; i < n; i++)
-	//	AdjMatrix[i] = new int[n];
-	//for (int i = 0; i < n; i++)
-	//	for (int j = 0; j < n; j++)
-	//		AdjMatrix[i][j] = 1023;
-	//for (Edge e : Edges) {
-	//	AdjMatrix[e.V1][e.V2] = e.weight;
-	//	AdjMatrix[e.V2][e.V1] = e.weight;
-	//}
+
+	/*vector<int> v(n, INF);
+
+	vector<vector<int>>AdjMatrix2(n, v);
+	AdjMatrix = AdjMatrix2;
+
+	for (Edge e : Edges) {
+		AdjMatrix[e.V1 - 1][e.V2 - 1] = e.weight;
+		AdjMatrix[e.V2 - 1][e.V1 - 1] = e.weight;
+	}*/
 }
 
 
@@ -22,7 +21,7 @@ vector<Edge> Graph::Kraskal()
 {
 	vector<set<int>> komponent;
 	vector<Edge> answer;
-	sort(Edges.begin(), Edges.end(), [](Edge e1, Edge e2){return e1.weight < e2.weight; });
+	sort(Edges.begin(), Edges.end(), [](Edge e1, Edge e2) {return e1.weight < e2.weight; });
 
 	answer.push_back(Edges[0]);
 	komponent.push_back({ Edges[0].V2 });
@@ -68,9 +67,6 @@ vector<Edge> Graph::Kraskal()
 		}
 	}
 
-
-
-
 	return answer;
 }
 
@@ -82,14 +78,14 @@ vector<Edge> Graph::Prima()
 	set<int> komponent;
 	Edge e;
 	komponent.insert(Edges[0].V1);
-	while (answer.size() < CountV-1) {
-		e = MinEdge( komponent);
+	while (answer.size() < CountV - 1) {
+		e = MinEdge(komponent);
 		if (!(e.V1 == -1)) {
 			answer.push_back(e);
 			komponent.insert(e.V1);
 			komponent.insert(e.V2);
 		}
-		else {break;}
+		else { break; }
 	}
 	return answer;
 }
@@ -99,12 +95,11 @@ Edge Graph::MinEdge(set<int> komp)
 	Edge rm;
 	for (int v : komp) {
 		for (Edge e : Edges) {
-			if ((e.V1 == v || e.V2 == v) && (komp.find( e.V1) == komp.end() || komp.find(e.V2) == komp.end())) {
-				if (rm.weight > e.weight) {rm = e;}
+			if ((e.V1 == v || e.V2 == v) && (komp.find(e.V1) == komp.end() || komp.find(e.V2) == komp.end())) {
+				if (rm.weight > e.weight) { rm = e; }
 			}
 		}
 	}
 	return rm;
 }
-
 
