@@ -3,13 +3,23 @@
 #include <stack>
 
 
-//float recur(float a) {
-//	return recur(a)
-//}
+float recur(float a, int k) {
+	cout << a<<endl;
+	a = 2.0 / 3.0 * a;
+	k--;
+	if (k == 0)
+	{
+		return 0;
+	}
+	recur(a, k);
+	return a;
+}
 
 bool POP(stack<char> &a) {
 	try {
-		//char b = a.top();
+		cout<< a.top();
+		if (a.size() == 0)
+			throw ;
 		a.pop();
 	}
 	catch (...) {
@@ -17,6 +27,7 @@ bool POP(stack<char> &a) {
 	}
 	return true;
 }
+
 bool PUSH(stack<char> &a, char c) {
 	try {
 		a.push(c);
@@ -95,6 +106,8 @@ void main()
 			break;
 	}
 
+
+	recur(2.0 / 3.0,3);
 }
 
 
